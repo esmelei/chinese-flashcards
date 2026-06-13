@@ -9,316 +9,595 @@
 <title>中文 Flashcards</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;color:#1c1c1e}
-.app{max-width:430px;margin:0 auto;display:flex;flex-direction:column;min-height:100vh;background:#fff}
-.topbar{display:flex;align-items:center;gap:10px;padding:12px 16px 8px;border-bottom:1px solid #e5e5ea;background:#fff;position:sticky;top:0;z-index:10}
-#catname{font-size:12px;font-weight:600;color:#1c1c1e;flex:none;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pbw{flex:1;height:4px;background:#e5e5ea;border-radius:2px;overflow:hidden}
-#pbf{height:100%;background:#007aff;border-radius:2px;transition:width .3s;width:0%}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;background:#F4F4EF;color:#1c1c1e}
+.app{max-width:430px;margin:0 auto;display:flex;flex-direction:column;min-height:100vh;background:#F4F4EF}
+
+/* TOP BAR */
+.topbar{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;background:#fff;border-bottom:1px solid #ddddd8;position:sticky;top:0;z-index:10}
+#catname{font-size:12px;font-weight:700;color:#1c1c1e;flex:none;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pbw{flex:1;height:4px;background:#ddddd8;border-radius:2px;overflow:hidden}
+#pbf{height:100%;background:#4A7BC8;border-radius:2px;transition:width .3s;width:0%}
 #ptx{font-size:11px;color:#8e8e93;white-space:nowrap;min-width:36px;text-align:right}
-.tabs{overflow-x:auto;white-space:nowrap;padding:8px 16px;background:#fff;border-bottom:1px solid #e5e5ea;scrollbar-width:none}
+
+/* TABS */
+.tabs{overflow-x:auto;white-space:nowrap;padding:10px 16px;background:#fff;border-bottom:1px solid #ddddd8;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{display:inline-block;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid #e5e5ea;background:#f2f2f7;color:#8e8e93;margin-right:5px;user-select:none;-webkit-user-select:none}
-.tab.on{background:#2d3561;color:#fff;border-color:#2d3561}
-.legend{display:flex;gap:8px;justify-content:center;padding:7px 16px 5px;flex-wrap:wrap}
-.li{display:flex;align-items:center;gap:3px;font-size:10px;color:#8e8e93}
-.tb{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;font-size:9px;font-weight:600}
-.t1{background:#dbeafe;color:#1e40af}
-.t2{background:#dcfce7;color:#166534}
-.t3{background:#fef9c3;color:#854d0e}
-.t4{background:#fee2e2;color:#991b1b}
-.t0{background:#f2f2f7;color:#8e8e93}
+.tab{display:inline-block;padding:7px 14px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #e0e0e5;background:#F4F4EF;color:#8e8e93;margin-right:6px;user-select:none;-webkit-user-select:none}
+.tab.on{background:#1c2a5e;color:#fff;border-color:#1c2a5e}
+
+/* AREA */
 .area{flex:1;display:flex;flex-direction:column;align-items:center;padding:16px;gap:14px}
-.card{width:100%;max-width:370px;background:#fff;border:1px solid #e5e5ea;border-radius:22px;padding:28px 20px 20px;display:flex;flex-direction:column;align-items:center;min-height:320px;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-#cnum{position:absolute;top:13px;left:16px;font-size:10px;color:#aeaeb2}
-#emoji{font-size:72px;line-height:1;margin-bottom:14px;user-select:none;-webkit-user-select:none}
-#cen{font-size:22px;font-weight:600;color:#1c1c1e;text-align:center;margin-bottom:18px;line-height:1.3}
-#revbtn{padding:11px 28px;border-radius:22px;font-size:14px;font-weight:500;border:1px solid #e5e5ea;background:#f2f2f7;color:#1c1c1e;cursor:pointer;-webkit-appearance:none}
-#pyblock{display:none;flex-direction:column;align-items:center;gap:7px;width:100%;margin-top:6px}
-#cpy{font-size:20px;font-weight:600;color:#007aff;text-align:center;letter-spacing:.03em;text-transform:lowercase}
-#ctones{font-size:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;min-height:20px}
-#czh{font-size:38px;color:#1c1c1e;text-align:center}
-#ctip{font-size:11px;color:#8e8e93;text-align:center;line-height:1.6;padding:0 8px;font-style:italic}
-.nav{display:flex;gap:10px;width:100%;max-width:370px}
-.kbtn{flex:1;padding:15px;border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;border:1px solid #e5e5ea;background:#f2f2f7;color:#1c1c1e;-webkit-appearance:none}
-.kyes{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
-.kno{background:#fff1f2;color:#b91c1c;border-color:#fecdd3}
+
+/* CARD */
+.card{width:100%;max-width:390px;background:#F4F4EF;border-radius:24px;padding:28px 24px 24px;display:flex;flex-direction:column;align-items:center;min-height:360px;position:relative;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+#cnum{position:absolute;top:14px;left:18px;font-size:10px;color:#c0c0c8;font-weight:500}
+#emoji{font-size:72px;line-height:1;margin-bottom:16px;user-select:none;-webkit-user-select:none}
+#cen{font-size:24px;font-weight:700;color:#1c1c1e;text-align:center;margin-bottom:20px;line-height:1.3}
+
+/* REVEAL BUTTON */
+#revbtn{padding:13px 36px;border-radius:30px;font-size:15px;font-weight:600;border:none;background:#4A7BC8;color:#fff;cursor:pointer;-webkit-appearance:none;letter-spacing:.01em}
+
+/* PRONUNCIATION BLOCK */
+#pyblock{display:none;flex-direction:column;align-items:center;gap:12px;width:100%;margin-top:4px}
+
+/* CHINESE CHARACTERS */
+#czh{font-size:28px;color:#4A7BC8;text-align:center;font-weight:400;letter-spacing:.05em}
+
+/* WORD ROW */
+#wordrow{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;width:100%;padding:4px 0}
+.word{display:flex;flex-direction:column;align-items:center;gap:0}
+.word-ph{font-size:11px;color:#a0a0aa;font-weight:400;text-align:center;margin-bottom:3px;font-style:normal}
+.word-py{font-size:22px;font-weight:700;color:#4A7BC8;text-align:center;border-bottom:2px solid #4A7BC8;padding-bottom:2px;margin-bottom:4px;text-transform:lowercase}
+.word-en{font-size:11px;color:#8e8e93;text-align:center;font-style:italic}
+
+/* FOOTNOTE */
+#fnote{font-size:12px;color:#8e8e93;text-align:left;line-height:1.6;font-style:italic;width:100%;padding:10px 4px 0;border-top:1px solid #ddddd8;margin-top:4px}
+
+/* DONE SCREEN */
+#donescreen{display:none;width:100%;max-width:390px;background:#F4F4EF;border-radius:24px;padding:48px 24px;flex-direction:column;align-items:center;gap:16px;text-align:center;min-height:360px;justify-content:center;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+#donescreen h2{font-size:22px;font-weight:700}
+#donescreen p{font-size:14px;color:#8e8e93}
+#donebtn{margin-top:8px;padding:13px 36px;border-radius:30px;font-size:15px;font-weight:600;border:none;background:#4A7BC8;color:#fff;cursor:pointer;-webkit-appearance:none}
+
+/* NAV BUTTONS */
+.nav{display:flex;gap:12px;width:100%;max-width:390px}
+.kbtn{flex:1;padding:16px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;border:none;-webkit-appearance:none;letter-spacing:.01em}
+.kno{background:#E8502A;color:#fff}
+.kyes{background:#6A9E7A;color:#fff}
+
 #score{font-size:11px;color:#8e8e93;text-align:center;min-height:16px}
 #score b{color:#1c1c1e;font-weight:600}
-#donescreen{display:none;width:100%;max-width:370px;background:#fff;border:1px solid #e5e5ea;border-radius:22px;padding:40px 24px;flex-direction:column;align-items:center;gap:14px;text-align:center;min-height:320px;justify-content:center}
-#donescreen h2{font-size:20px;font-weight:700}
-#donescreen p{font-size:13px;color:#8e8e93}
-#donebtn{margin-top:8px;padding:11px 28px;border-radius:22px;font-size:14px;font-weight:500;border:1px solid #e5e5ea;background:#f2f2f7;color:#1c1c1e;cursor:pointer;-webkit-appearance:none}
 </style>
 </head>
 <body>
 <div class="app">
-
   <div class="topbar">
     <div id="catname"></div>
     <div class="pbw"><div id="pbf"></div></div>
     <div id="ptx">0/0</div>
   </div>
-
   <div class="tabs" id="tabs"></div>
-
-  <div class="legend">
-    <div class="li"><span class="tb t1">1</span>flat</div>
-    <div class="li"><span class="tb t2">2</span>rising</div>
-    <div class="li"><span class="tb t3">3</span>dip</div>
-    <div class="li"><span class="tb t4">4</span>falling</div>
-    <div class="li"><span class="tb t0">·</span>neutral</div>
-  </div>
-
   <div class="area">
-
     <div class="card" id="cardbox">
       <span id="cnum"></span>
       <div id="emoji"></div>
       <div id="cen"></div>
       <button id="revbtn" onclick="reveal()">show pronunciation</button>
       <div id="pyblock">
-        <div id="cpy"></div>
-        <div id="ctones"></div>
         <div id="czh"></div>
-        <div id="ctip"></div>
+        <div id="wordrow"></div>
+        <div id="fnote"></div>
       </div>
     </div>
-
     <div id="donescreen">
-      <div style="font-size:64px">🎉</div>
+      <div style="font-size:64px">&#127881;</div>
       <h2>set complete!</h2>
       <p id="donemsg"></p>
       <button id="donebtn" onclick="replay()">try again</button>
     </div>
-
-    <div class="nav">
-      <button class="kbtn kno" onclick="mark(false)">✕ not yet</button>
-      <button class="kbtn kyes" onclick="mark(true)">✓ got it</button>
+    <div class="nav" id="navrow">
+      <button class="kbtn kno" onclick="mark(false)">&#x2715; not yet</button>
+      <button class="kbtn kyes" onclick="mark(true)">&#x2713; got it</button>
     </div>
-
     <div id="score"></div>
-
   </div>
 </div>
 <script>
 var V={
 "👋 greetings":[
-  {e:"good morning",p:"zǎo",t:[3],z:"早",em:"🌅",tip:"just this one word — locals use it"},
-  {e:"good night",p:"wǎn ān",t:[3,1],z:"晚安",em:"🌙",tip:"wǎn dips, ān is flat"},
-  {e:"you're welcome",p:"bù kè qì",t:[4,4,4],z:"不客气",em:"🤝",tip:"three falling tones"},
-  {e:"please",p:"qǐng",t:[3],z:"请",em:"🙏",tip:"dip tone — softens any request"},
-  {e:"sorry",p:"duì bu qǐ",t:[4,0,3],z:"对不起",em:"😔",tip:"duì falls, bu neutral, qǐ dips"},
-  {e:"yes / correct",p:"duì",t:[4],z:"对",em:"✅",tip:"what locals say — not shì de"},
-  {e:"no / not right",p:"bù duì",t:[4,4],z:"不对",em:"❌",tip:"both syllables fall"},
-  {e:"excuse me (passing)",p:"jiè guò",t:[4,4],z:"借过",em:"🚶",tip:"crowds and trains — lit. borrow passage"},
-  {e:"excuse me (oops)",p:"bù hǎo yì si",t:[4,3,4,0],z:"不好意思",em:"😬",tip:"softer than duì bu qǐ — for small mistakes"},
-  {e:"excuse me (may i ask)",p:"qǐng wèn",t:[3,4],z:"请问",em:"🙋",tip:"starts any question politely"},
-  {e:"where is…",p:"zài nǎ",t:[4,3],z:"在哪",em:"📍",tip:"attach any place — e.g. cè suǒ zài nǎ"},
-  {e:"okay / sure",p:"hǎo de",t:[3,0],z:"好的",em:"👍",tip:"hǎo dips, de neutral"},
-  {e:"not okay / can't",p:"bù xíng",t:[4,2],z:"不行",em:"🚫",tip:"bù falls, xíng rises"},
-  {e:"i understand",p:"míng bai le",t:[2,0,0],z:"明白了",em:"💡",tip:"míng rises, bai and le neutral"},
-  {e:"i don't know",p:"bù zhī dào",t:[4,1,4],z:"不知道",em:"🤷",tip:"bù falls, zhī flat, dào falls"},
-  {e:"wait a moment",p:"děng yī xià",t:[3,1,4],z:"等一下",em:"⏱️",tip:"děng dips, yī flat, xià falls"},
-  {e:"no problem",p:"méi wèn tí",t:[2,4,2],z:"没问题",em:"😌",tip:"méi rises, wèn falls, tí rises"},
-  {e:"never mind",p:"méi shì",t:[2,4],z:"没事",em:"🐷",tip:"very common filler — it's fine"},
-  {e:"really?",p:"zhēn de ma",t:[1,0,0],z:"真的吗？",em:"😲",tip:"zhēn flat, de and ma neutral"},
-  {e:"of course",p:"dāng rán",t:[1,2],z:"当然",em:"😄",tip:"dāng flat, rán rises"}
+  {e:"good morning",em:"🌅",z:"早",
+   words:[{py:"zǎo",ph:"dzow",en:"morning"}],
+   note:null},
+  {e:"good night",em:"🌙",z:"晚安",
+   words:[{py:"wǎn",ph:"wahn",en:"night"},{py:"ān",ph:"ahn",en:"peace"}],
+   note:"安 means peace/safe — wishing someone a peaceful night"},
+  {e:"you're welcome",em:"🤝",z:"不客气",
+   words:[{py:"bù",ph:"boo",en:"not"},{py:"kè qi",ph:"kuh chee",en:"polite/formal"}],
+   note:"lit. 'don't be formal' — Chinese hospitality deflects all thanks"},
+  {e:"please",em:"🙏",z:"请",
+   words:[{py:"qǐng",ph:"ching",en:"please/invite"}],
+   note:null},
+  {e:"sorry",em:"😔",z:"对不起",
+   words:[{py:"duì",ph:"dway",en:"correct"},{py:"bu",ph:"boo",en:"not"},{py:"qǐ",ph:"chee",en:"stand up to"}],
+   note:"lit. 'can't face you' — a genuine apology, heavier than 不好意思"},
+  {e:"yes / correct",em:"✅",z:"对",
+   words:[{py:"duì",ph:"dway",en:"correct"}],
+   note:"locals say 对 not 是 — 是 sounds textbook"},
+  {e:"no / not right",em:"❌",z:"不对",
+   words:[{py:"bù",ph:"boo",en:"not"},{py:"duì",ph:"dway",en:"correct"}],
+   note:null},
+  {e:"excuse me (passing)",em:"🚶",z:"借过",
+   words:[{py:"jiè",ph:"jyeh",en:"borrow"},{py:"guò",ph:"gwaw",en:"pass"}],
+   note:"lit. 'borrow the way' — use on packed trains, crowded markets"},
+  {e:"excuse me (oops)",em:"😬",z:"不好意思",
+   words:[{py:"bù",ph:"boo",en:"not"},{py:"hǎo yì si",ph:"haow ee suh",en:"have the face"}],
+   note:"the most useful social phrase — covers awkward moments, small requests, minor bumps"},
+  {e:"excuse me (may i ask)",em:"🙋",z:"请问",
+   words:[{py:"qǐng",ph:"ching",en:"please"},{py:"wèn",ph:"when",en:"ask"}],
+   note:"always use this before asking a stranger anything — it's polite and disarming"},
+  {e:"where is…",em:"📍",z:"在哪",
+   words:[{py:"zài",ph:"dzye",en:"at/is"},{py:"nǎ",ph:"nah",en:"where"}],
+   note:"attach any place in front: 厕所在哪 = where is the toilet"},
+  {e:"okay / sure",em:"👍",z:"好的",
+   words:[{py:"hǎo",ph:"haow",en:"good"},{py:"de",ph:"duh",en:"[confirm]"}],
+   note:null},
+  {e:"not okay / can't",em:"🚫",z:"不行",
+   words:[{py:"bù",ph:"boo",en:"not"},{py:"xíng",ph:"shing",en:"work/go"}],
+   note:"lit. 'won't work' — firm but not rude"},
+  {e:"i understand",em:"💡",z:"明白了",
+   words:[{py:"míng bai",ph:"ming bye",en:"understand"},{py:"le",ph:"luh",en:"[done]"}],
+   note:null},
+  {e:"i don't know",em:"🤷",z:"不知道",
+   words:[{py:"bù",ph:"boo",en:"not"},{py:"zhī dào",ph:"jir dow",en:"know"}],
+   note:null},
+  {e:"wait a moment",em:"⏱️",z:"等一下",
+   words:[{py:"děng",ph:"dung",en:"wait"},{py:"yī xià",ph:"ee shyah",en:"a moment"}],
+   note:null},
+  {e:"no problem",em:"😌",z:"没问题",
+   words:[{py:"méi",ph:"may",en:"no/none"},{py:"wèn tí",ph:"when tee",en:"problem"}],
+   note:null},
+  {e:"never mind",em:"🐷",z:"没事",
+   words:[{py:"méi",ph:"may",en:"no"},{py:"shì",ph:"shir",en:"matter"}],
+   note:"extremely common — used to brush off thanks, apologies, worries"},
+  {e:"really?",em:"😲",z:"真的吗？",
+   words:[{py:"zhēn de",ph:"juhn duh",en:"really"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"of course",em:"😄",z:"当然",
+   words:[{py:"dāng rán",ph:"dahng rahn",en:"of course"}],
+   note:null}
 ],
 "💬 conversation":[
-  {e:"i don't understand",p:"wǒ tīng bù dǒng",t:[3,1,4,3],z:"我听不懂",em:"😵",tip:"wǒ dips, tīng flat, bù falls, dǒng dips"},
-  {e:"say it again",p:"zài shuō yī biàn",t:[4,1,1,4],z:"再说一遍",em:"🔁",tip:"zài and biàn fall, shuō and yī flat"},
-  {e:"speak slower",p:"màn yī diǎn",t:[4,1,3],z:"慢一点",em:"🐢",tip:"màn falls, yī flat, diǎn dips"},
-  {e:"i'm learning chinese",p:"wǒ zài xué zhōng wén",t:[3,4,2,1,2],z:"我在学中文",em:"📖",tip:"saying this gets instant goodwill"},
-  {e:"my chinese isn't good",p:"wǒ zhōng wén bù hǎo",t:[3,1,2,4,3],z:"我中文不好",em:"😅",tip:"humble and endearing to locals"},
-  {e:"where are you from?",p:"nǐ shì nǎ lǐ rén",t:[3,4,3,3,2],z:"你是哪里人？",em:"🌍",tip:"natural local phrasing"},
-  {e:"i'm canadian",p:"wǒ shì jiā ná dà rén",t:[3,4,1,2,4,2],z:"我是加拿大人",em:"🍁",tip:"jiā flat, ná rises, dà falls, rén rises"},
-  {e:"what's your name?",p:"nǐ jiào shén me",t:[3,4,2,0],z:"你叫什么？",em:"🏷️",tip:"shén rises, me neutral"},
-  {e:"nice to meet you",p:"rèn shi nǐ hěn gāo xìng",t:[4,0,3,3,1,4],z:"认识你很高兴",em:"🤗",tip:"rèn falls, shi neutral, then dip dip flat fall"},
-  {e:"let me think",p:"wǒ xiǎng yī xià",t:[3,3,1,4],z:"我想一下",em:"🤔",tip:"buys you time gracefully"},
-  {e:"do you speak english?",p:"nǐ huì shuō yīng wén ma",t:[3,4,1,1,2,0],z:"你会说英文吗？",em:"🇬🇧",tip:"ma at the end makes it a question"},
-  {e:"write it down?",p:"xiě xià lái",t:[3,4,2],z:"写下来",em:"✏️",tip:"useful when you can't catch the pronunciation"},
-  {e:"what does this mean?",p:"shén me yì si",t:[2,0,4,0],z:"什么意思？",em:"❓",tip:"shén rises, me and si neutral, yì falls"},
-  {e:"i'm a foreigner",p:"wǒ shì wài guó rén",t:[3,4,4,2,2],z:"我是外国人",em:"🌐",tip:"helpful context setter"},
-  {e:"i really like china",p:"hěn xǐ huān zhōng guó",t:[3,3,1,1,2],z:"很喜欢中国",em:"❤️",tip:"drop wǒ for a more natural feel"},
-  {e:"is that so?",p:"shì ma",t:[4,0],z:"是吗",em:"🤨",tip:"very natural back-and-forth response"},
-  {e:"too funny",p:"tài hǎo xiào le",t:[4,3,4,0],z:"太好笑了",em:"😂",tip:"tài falls, hǎo dips, xiào falls, le neutral"},
-  {e:"i'm not sure",p:"bù tài quē dìng",t:[4,4,1,4],z:"不太确定",em:"🤷",tip:"bù and tài fall, quē flat, dìng falls"},
-  {e:"same to you",p:"nǐ yě shì",t:[3,3,4],z:"你也是",em:"👐",tip:"nǐ and yě dip, shì falls"},
-  {e:"i've been here before",p:"lái guò zhōng guó",t:[2,4,1,2],z:"来过中国",em:"✈️",tip:"lái rises, guò falls, zhōng flat, guó rises"}
+  {e:"i don't understand",em:"😵",z:"我听不懂",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"tīng",ph:"ting",en:"hear"},{py:"bù dǒng",ph:"boo dong",en:"not understand"}],
+   note:null},
+  {e:"say it again",em:"🔁",z:"再说一遍",
+   words:[{py:"zài",ph:"dzye",en:"again"},{py:"shuō",ph:"shwaw",en:"say"},{py:"yī biàn",ph:"ee byen",en:"one time"}],
+   note:null},
+  {e:"speak slower",em:"🐢",z:"慢一点",
+   words:[{py:"màn",ph:"mahn",en:"slow"},{py:"yī diǎn",ph:"ee dyen",en:"a little"}],
+   note:null},
+  {e:"i'm learning chinese",em:"📖",z:"我在学中文",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"zài",ph:"dzye",en:"am [doing]"},{py:"xué",ph:"shweh",en:"learn"},{py:"zhōng wén",ph:"jong when",en:"Chinese"}],
+   note:"saying this unlocks patience and warmth from any local — use it early"},
+  {e:"my chinese isn't good",em:"😅",z:"我中文不好",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"zhōng wén",ph:"jong when",en:"Chinese"},{py:"bù hǎo",ph:"boo haow",en:"not good"}],
+   note:"self-deprecation is a social lubricant in China — locals will compliment you back"},
+  {e:"where are you from?",em:"🌍",z:"你是哪里人？",
+   words:[{py:"nǐ",ph:"nee",en:"you"},{py:"shì",ph:"shir",en:"are"},{py:"nǎ lǐ",ph:"nah lee",en:"where"},{py:"rén",ph:"ren",en:"person"}],
+   note:"asking hometown, not just city — Chinese identity is tied to 老家 (home province)"},
+  {e:"i'm canadian",em:"🍁",z:"我是加拿大人",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"shì",ph:"shir",en:"am"},{py:"jiā ná dà",ph:"jyah nah dah",en:"Canada"},{py:"rén",ph:"ren",en:"person"}],
+   note:null},
+  {e:"what's your name?",em:"🏷️",z:"你叫什么？",
+   words:[{py:"nǐ",ph:"nee",en:"you"},{py:"jiào",ph:"jyow",en:"called"},{py:"shén me",ph:"shun muh",en:"what"}],
+   note:null},
+  {e:"nice to meet you",em:"🤗",z:"认识你很高兴",
+   words:[{py:"rèn shi",ph:"ren shir",en:"know/meet"},{py:"nǐ",ph:"nee",en:"you"},{py:"hěn",ph:"hun",en:"very"},{py:"gāo xìng",ph:"gow shing",en:"happy"}],
+   note:null},
+  {e:"let me think",em:"🤔",z:"我想一下",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"xiǎng",ph:"shyang",en:"think"},{py:"yī xià",ph:"ee shyah",en:"a moment"}],
+   note:null},
+  {e:"do you speak english?",em:"🇬🇧",z:"你会说英文吗？",
+   words:[{py:"nǐ",ph:"nee",en:"you"},{py:"huì",ph:"hway",en:"can"},{py:"shuō",ph:"shwaw",en:"speak"},{py:"yīng wén",ph:"ying when",en:"English"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"write it down?",em:"✏️",z:"写下来",
+   words:[{py:"xiě",ph:"shyeh",en:"write"},{py:"xià lái",ph:"shyah lye",en:"down"}],
+   note:null},
+  {e:"what does this mean?",em:"❓",z:"什么意思？",
+   words:[{py:"shén me",ph:"shun muh",en:"what"},{py:"yì si",ph:"ee suh",en:"meaning"}],
+   note:null},
+  {e:"i'm a foreigner",em:"🌐",z:"我是外国人",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"shì",ph:"shir",en:"am"},{py:"wài guó",ph:"why gwaw",en:"foreign country"},{py:"rén",ph:"ren",en:"person"}],
+   note:null},
+  {e:"i really like china",em:"❤️",z:"很喜欢中国",
+   words:[{py:"hěn",ph:"hun",en:"very"},{py:"xǐ huān",ph:"shee hwahn",en:"like"},{py:"zhōng guó",ph:"jong gwaw",en:"China"}],
+   note:null},
+  {e:"is that so?",em:"🤨",z:"是吗",
+   words:[{py:"shì",ph:"shir",en:"is"},{py:"ma",ph:"mah",en:"?"}],
+   note:"a versatile response — shows you're engaged without committing"},
+  {e:"too funny",em:"😂",z:"太好笑了",
+   words:[{py:"tài",ph:"tie",en:"too/so"},{py:"hǎo xiào",ph:"haow shyow",en:"funny"},{py:"le",ph:"luh",en:"[emphasis]"}],
+   note:null},
+  {e:"i'm not sure",em:"🤷",z:"不太确定",
+   words:[{py:"bù tài",ph:"boo tie",en:"not too"},{py:"quē dìng",ph:"chway ding",en:"certain"}],
+   note:null},
+  {e:"same to you",em:"👐",z:"你也是",
+   words:[{py:"nǐ",ph:"nee",en:"you"},{py:"yě",ph:"yeh",en:"also"},{py:"shì",ph:"shir",en:"are"}],
+   note:null},
+  {e:"i've been here before",em:"✈️",z:"来过中国",
+   words:[{py:"lái",ph:"lye",en:"come"},{py:"guò",ph:"gwaw",en:"[been]"},{py:"zhōng guó",ph:"jong gwaw",en:"China"}],
+   note:"过 after a verb means you've had that experience before"}
 ],
 "🍜 ordering food":[
-  {e:"menu please",p:"gěi wǒ cài dān",t:[3,3,4,1],z:"给我菜单",em:"📋",tip:"gěi and wǒ dip, cài falls, dān flat"},
-  {e:"excuse me (waiter)",p:"má fán nǐ",t:[2,2,3],z:"麻烦你",em:"🙋",tip:"polite way to get a waiter's attention"},
-  {e:"i'll have this",p:"wǒ yào zhè ge",t:[3,4,4,0],z:"我要这个",em:"☝️",tip:"wǒ dips, yào and zhè fall, ge neutral"},
-  {e:"one portion of…",p:"yī fèn",t:[1,4],z:"一份",em:"🍽️",tip:"yī flat, fèn falls — follow with dish name"},
-  {e:"i can eat spicy",p:"wǒ néng chī là",t:[3,2,1,4],z:"我能吃辣",em:"🌶️",tip:"néng rises, chī flat, là falls"},
-  {e:"i like spicy",p:"xǐ huān là",t:[3,1,4],z:"喜欢辣",em:"🔥",tip:"xǐ dips, huān flat, là falls"},
-  {e:"no [ingredient]",p:"bù yào",t:[4,4],z:"不要",em:"🚫",tip:"e.g. bù yào xiāng cài = no cilantro"},
-  {e:"no cilantro",p:"bù yào xiāng cài",t:[4,4,1,4],z:"不要香菜",em:"🌿",tip:"xiāng flat, cài falls — life-saving phrase"},
-  {e:"one more of this",p:"zài lái yī ge",t:[4,2,1,0],z:"再来一个",em:"➕",tip:"zài falls, lái rises, yī flat, ge neutral"},
-  {e:"the bill",p:"mǎi dān",t:[3,1],z:"买单",em:"🧾",tip:"mǎi dips, dān flat — say this to pay"},
-  {e:"to go",p:"dǎ bāo",t:[3,1],z:"打包",em:"🥡",tip:"dǎ dips, bāo flat"},
-  {e:"so delicious!",p:"tài hǎo chī le",t:[4,3,1,0],z:"太好吃了",em:"😋",tip:"tài falls, hǎo dips, chī flat, le neutral"},
-  {e:"do you have…?",p:"yǒu méi yǒu",t:[3,2,3],z:"有没有",em:"🔍",tip:"the do-you-have pattern — add any noun after"},
-  {e:"what do you recommend?",p:"yǒu shén me tuī jiàn",t:[3,2,0,1,4],z:"有什么推荐？",em:"⭐",tip:"tuī flat, jiàn falls"},
-  {e:"is it sweet?",p:"tián ma",t:[2,0],z:"甜吗？",em:"🍬",tip:"swap for là / xián / suān to ask other flavors"},
-  {e:"i'm allergic to…",p:"wǒ duì…guò mǐn",t:[3,4,4,3],z:"我对…过敏",em:"⚠️",tip:"guò falls, mǐn dips — insert allergen in middle"},
-  {e:"less of this",p:"shǎo fàng yī diǎn",t:[3,4,1,3],z:"少放一点",em:"📉",tip:"shǎo dips, fàng falls, yī flat, diǎn dips"},
-  {e:"scan to pay",p:"sǎo mǎ fù kuǎn",t:[3,3,4,3],z:"扫码付款",em:"📱",tip:"essential — WeChat Pay and Alipay everywhere"},
-  {e:"do you take card?",p:"kě yǐ shuā kǎ ma",t:[3,3,1,3,0],z:"可以刷卡吗？",em:"💳",tip:"kě and yǐ dip, shuā flat, kǎ dips, ma neutral"},
-  {e:"a little bit",p:"yī diǎn diǎn",t:[1,3,0],z:"一点点",em:"🤏",tip:"yī flat, diǎn dips, diǎn neutral — just a tiny bit"}
+  {e:"menu please",em:"📋",z:"给我菜单",
+   words:[{py:"gěi wǒ",ph:"gay waw",en:"give me"},{py:"cài dān",ph:"tsye dahn",en:"menu"}],
+   note:null},
+  {e:"excuse me (waiter)",em:"🙋",z:"麻烦你",
+   words:[{py:"má fan",ph:"mah fahn",en:"trouble"},{py:"nǐ",ph:"nee",en:"you"}],
+   note:"lit. 'trouble you' — the polite way to get attention, not 喂 (hey!)"},
+  {e:"i'll have this",em:"☝️",z:"我要这个",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"yào",ph:"yow",en:"want"},{py:"zhè ge",ph:"juh guh",en:"this one"}],
+   note:null},
+  {e:"one portion of…",em:"🍽️",z:"一份",
+   words:[{py:"yī",ph:"ee",en:"one"},{py:"fèn",ph:"fun",en:"portion"}],
+   note:"份 is the measure word for dishes — follow with the food name"},
+  {e:"i can eat spicy",em:"🌶️",z:"我能吃辣",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"néng",ph:"nung",en:"can"},{py:"chī",ph:"chir",en:"eat"},{py:"là",ph:"lah",en:"spicy"}],
+   note:"useful in Hunan — locals will test you on this"},
+  {e:"i like spicy",em:"🔥",z:"喜欢辣",
+   words:[{py:"xǐ huān",ph:"shee hwahn",en:"like"},{py:"là",ph:"lah",en:"spicy"}],
+   note:null},
+  {e:"no [ingredient]",em:"🚫",z:"不要",
+   words:[{py:"bù yào",ph:"boo yow",en:"don't want"}],
+   note:"add the ingredient after: 不要香菜 = no cilantro"},
+  {e:"no cilantro",em:"🌿",z:"不要香菜",
+   words:[{py:"bù yào",ph:"boo yow",en:"don't want"},{py:"xiāng cài",ph:"shyang tsye",en:"cilantro"}],
+   note:"香菜 = fragrant vegetable — not everyone agrees on the fragrant part"},
+  {e:"one more of this",em:"➕",z:"再来一个",
+   words:[{py:"zài",ph:"dzye",en:"again"},{py:"lái",ph:"lye",en:"come"},{py:"yī ge",ph:"ee guh",en:"one"}],
+   note:null},
+  {e:"the bill",em:"🧾",z:"买单",
+   words:[{py:"mǎi",ph:"my",en:"buy"},{py:"dān",ph:"dahn",en:"bill"}],
+   note:"in China one person pays for the whole table — whoever invited, pays"},
+  {e:"to go",em:"🥡",z:"打包",
+   words:[{py:"dǎ bāo",ph:"dah bow",en:"pack up"}],
+   note:null},
+  {e:"so delicious!",em:"😋",z:"太好吃了",
+   words:[{py:"tài",ph:"tie",en:"so"},{py:"hǎo chī",ph:"haow chir",en:"delicious"},{py:"le",ph:"luh",en:"[wow]"}],
+   note:null},
+  {e:"do you have…?",em:"🔍",z:"有没有",
+   words:[{py:"yǒu méi yǒu",ph:"yo may yo",en:"have or not have"}],
+   note:"the A-not-A question pattern — add what you're looking for after"},
+  {e:"what do you recommend?",em:"⭐",z:"有什么推荐？",
+   words:[{py:"yǒu",ph:"yo",en:"have"},{py:"shén me",ph:"shun muh",en:"what"},{py:"tuī jiàn",ph:"tway jyen",en:"recommend"}],
+   note:null},
+  {e:"is it sweet?",em:"🍬",z:"甜吗？",
+   words:[{py:"tián",ph:"tyen",en:"sweet"},{py:"ma",ph:"mah",en:"?"}],
+   note:"swap 甜 for 辣 (lah/spicy) 咸 (shyen/salty) 酸 (swahn/sour)"},
+  {e:"i'm allergic to…",em:"⚠️",z:"我对…过敏",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"duì",ph:"dway",en:"to"},{py:"guò mǐn",ph:"gwaw min",en:"allergic"}],
+   note:"insert allergen between 对 and 过敏"},
+  {e:"less of this",em:"📉",z:"少放一点",
+   words:[{py:"shǎo",ph:"shaow",en:"less"},{py:"fàng",ph:"fahng",en:"put"},{py:"yī diǎn",ph:"ee dyen",en:"a little"}],
+   note:null},
+  {e:"scan to pay",em:"📱",z:"扫码付款",
+   words:[{py:"sǎo mǎ",ph:"saow mah",en:"scan code"},{py:"fù kuǎn",ph:"foo kwahn",en:"pay"}],
+   note:"cash is rare in China now — WeChat Pay and Alipay are used everywhere including tiny stalls"},
+  {e:"do you take card?",em:"💳",z:"可以刷卡吗？",
+   words:[{py:"kě yǐ",ph:"kuh ee",en:"can"},{py:"shuā kǎ",ph:"shwah kah",en:"swipe card"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"a little bit",em:"🤏",z:"一点点",
+   words:[{py:"yī diǎn diǎn",ph:"ee dyen dyen",en:"a tiny bit"}],
+   note:null}
 ],
 "😋 table talk":[
-  {e:"cheers!",p:"gān bēi",t:[1,1],z:"干杯",em:"🥂",tip:"both flat — easy!"},
-  {e:"eat more!",p:"duō chī diǎn",t:[1,1,3],z:"多吃点",em:"🥢",tip:"what hosts say to guests — duō and chī flat, diǎn dips"},
-  {e:"i'm full",p:"wǒ chī bǎo le",t:[3,1,3,0],z:"我吃饱了",em:"🤰",tip:"chī flat, bǎo dips, le neutral"},
-  {e:"what is this dish?",p:"zhè shì shén me cài",t:[4,4,2,0,4],z:"这是什么菜？",em:"🍛",tip:"shén rises, me neutral, cài falls"},
-  {e:"i love this",p:"wǒ chāo xǐ huān",t:[3,1,3,1],z:"我超喜欢",em:"🥰",tip:"chāo means super — very current expression"},
-  {e:"smells amazing",p:"hǎo xiāng",t:[3,1],z:"好香",em:"👃",tip:"hǎo dips, xiāng flat — great smell compliment"},
-  {e:"so good!",p:"zhēn hǎo chī",t:[1,3,1],z:"真好吃",em:"😍",tip:"zhēn flat, hǎo dips, chī flat"},
-  {e:"can't stop eating",p:"tíng bù xià lái",t:[2,4,4,2],z:"停不下来",em:"🍴",tip:"very current phrase — people really say this"},
-  {e:"so good i could cry",p:"hǎo chī dào kū",t:[3,1,4,1],z:"好吃到哭",em:"😭",tip:"current internet-era expression"},
-  {e:"my favorite",p:"wǒ zuì ài chī zhè ge",t:[3,4,4,1,4,0],z:"我最爱吃这个",em:"🏆",tip:"zuì and ài fall, chī flat, zhè falls, ge neutral"},
-  {e:"so flavorful",p:"hǎo xiān",t:[3,1],z:"好鲜",em:"🐟",tip:"xiān = fresh and umami — great seafood compliment"},
-  {e:"what's in it?",p:"lǐ miàn yǒu shén me",t:[3,4,3,2,0],z:"里面有什么？",em:"🔎",tip:"lǐ dips, miàn falls, yǒu dips, shén rises"},
-  {e:"how do you make this?",p:"zěn me zuò de",t:[3,0,4,0],z:"怎么做的？",em:"👨‍🍳",tip:"zěn dips, me neutral, zuò falls, de neutral"},
-  {e:"let me try",p:"wǒ cháng cháng",t:[3,2,0],z:"我尝尝",em:"😮",tip:"cháng rises, second one neutral — sounds natural"},
-  {e:"pairs so well",p:"hǎo pèi",t:[3,4],z:"好配",em:"🍷",tip:"hǎo dips, pèi falls — for food and drink combos"},
-  {e:"so refreshing",p:"hǎo qīng shuǎng",t:[3,1,3],z:"好清爽",em:"🧊",tip:"for cold dishes, fresh drinks, summer food"},
-  {e:"a little salty",p:"yǒu diǎn xián",t:[3,3,2],z:"有点咸",em:"🧂",tip:"polite observation — yǒu and diǎn dip, xián rises"},
-  {e:"not bad at all",p:"hái bù cuò",t:[2,4,4],z:"还不错",em:"😌",tip:"hái rises, bù and cuò fall — understated praise"},
-  {e:"so authentic",p:"hǎo zhèng zōng",t:[3,4,1],z:"好正宗",em:"⭐",tip:"hǎo dips, zhèng falls, zōng flat — big compliment"},
-  {e:"thank you for hosting",p:"xiè xiè kuǎn dài",t:[4,0,3,4],z:"谢谢款待",em:"🙇",tip:"xiè falls, xiè neutral, kuǎn dips, dài falls"}
+  {e:"cheers!",em:"🥂",z:"干杯",
+   words:[{py:"gān bēi",ph:"gahn bay",en:"dry cup"}],
+   note:"干 means dry — you're expected to finish the drink. A sip is a half-commitment"},
+  {e:"eat more!",em:"🥢",z:"多吃点",
+   words:[{py:"duō",ph:"dwaw",en:"more"},{py:"chī",ph:"chir",en:"eat"},{py:"diǎn",ph:"dyen",en:"a bit"}],
+   note:"hosts say this constantly — it's love, not pressure. The polite response is to eat more"},
+  {e:"i'm full",em:"🤰",z:"我吃饱了",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"chī bǎo",ph:"chir bow",en:"eaten full"},{py:"le",ph:"luh",en:"[done]"}],
+   note:null},
+  {e:"what is this dish?",em:"🍛",z:"这是什么菜？",
+   words:[{py:"zhè shì",ph:"juh shir",en:"this is"},{py:"shén me",ph:"shun muh",en:"what"},{py:"cài",ph:"tsye",en:"dish"}],
+   note:null},
+  {e:"i love this",em:"🥰",z:"我超喜欢",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"chāo",ph:"chaow",en:"super"},{py:"xǐ huān",ph:"shee hwahn",en:"like"}],
+   note:"超 is very current slang intensifier — stronger than 很 (very)"},
+  {e:"smells amazing",em:"👃",z:"好香",
+   words:[{py:"hǎo",ph:"haow",en:"so"},{py:"xiāng",ph:"shyang",en:"fragrant"}],
+   note:null},
+  {e:"so good!",em:"😍",z:"真好吃",
+   words:[{py:"zhēn",ph:"juhn",en:"really"},{py:"hǎo chī",ph:"haow chir",en:"delicious"}],
+   note:null},
+  {e:"can't stop eating",em:"🍴",z:"停不下来",
+   words:[{py:"tíng",ph:"ting",en:"stop"},{py:"bù",ph:"boo",en:"can't"},{py:"xià lái",ph:"shyah lye",en:"come down"}],
+   note:"lit. 'can't bring it to a stop' — very current expression"},
+  {e:"so good i could cry",em:"😭",z:"好吃到哭",
+   words:[{py:"hǎo chī",ph:"haow chir",en:"delicious"},{py:"dào",ph:"dow",en:"to the point of"},{py:"kū",ph:"koo",en:"cry"}],
+   note:"internet-era expression — widely used by younger Chinese"},
+  {e:"my favorite",em:"🏆",z:"我最爱吃这个",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"zuì",ph:"dzway",en:"most"},{py:"ài",ph:"eye",en:"love"},{py:"chī",ph:"chir",en:"eat"},{py:"zhè ge",ph:"juh guh",en:"this one"}],
+   note:null},
+  {e:"so flavorful",em:"🐟",z:"好鲜",
+   words:[{py:"hǎo",ph:"haow",en:"so"},{py:"xiān",ph:"shyen",en:"fresh/umami"}],
+   note:"鲜 captures both freshness and umami — no single English word covers it"},
+  {e:"what's in it?",em:"🔎",z:"里面有什么？",
+   words:[{py:"lǐ miàn",ph:"lee myen",en:"inside"},{py:"yǒu",ph:"yo",en:"have"},{py:"shén me",ph:"shun muh",en:"what"}],
+   note:null},
+  {e:"how do you make this?",em:"👨‍🍳",z:"怎么做的？",
+   words:[{py:"zěn me",ph:"dzun muh",en:"how"},{py:"zuò",ph:"dzwaw",en:"make"},{py:"de",ph:"duh",en:"[manner]"}],
+   note:null},
+  {e:"let me try",em:"😮",z:"我尝尝",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"cháng cháng",ph:"chahng chahng",en:"taste taste"}],
+   note:"reduplication softens the request — more casual and friendly"},
+  {e:"pairs so well",em:"🍷",z:"好配",
+   words:[{py:"hǎo",ph:"haow",en:"so"},{py:"pèi",ph:"pay",en:"match"}],
+   note:null},
+  {e:"so refreshing",em:"🧊",z:"好清爽",
+   words:[{py:"hǎo",ph:"haow",en:"so"},{py:"qīng shuǎng",ph:"ching shwahng",en:"refreshing/cool"}],
+   note:null},
+  {e:"a little salty",em:"🧂",z:"有点咸",
+   words:[{py:"yǒu diǎn",ph:"yo dyen",en:"a bit"},{py:"xián",ph:"shyen",en:"salty"}],
+   note:null},
+  {e:"not bad at all",em:"😌",z:"还不错",
+   words:[{py:"hái",ph:"hi",en:"still/quite"},{py:"bù cuò",ph:"boo tswaw",en:"not bad"}],
+   note:"classic Chinese understatement — this is high praise from a modest host"},
+  {e:"so authentic",em:"⭐",z:"好正宗",
+   words:[{py:"hǎo",ph:"haow",en:"so"},{py:"zhèng zōng",ph:"jung dzong",en:"authentic/original"}],
+   note:"正宗 is the highest food compliment — means it tastes exactly like the hometown original"},
+  {e:"thank you for hosting",em:"🙇",z:"谢谢款待",
+   words:[{py:"xiè xiè",ph:"shyeh shyeh",en:"thank you"},{py:"kuǎn dài",ph:"kwahn dye",en:"hospitality"}],
+   note:null}
 ],
 "🛍️ markets":[
-  {e:"how much?",p:"duō shǎo qián",t:[1,3,2],z:"多少钱？",em:"💰",tip:"duō flat, shǎo dips, qián rises"},
-  {e:"too expensive",p:"tài guì le",t:[4,4,0],z:"太贵了",em:"😤",tip:"tài and guì fall, le neutral — say firmly"},
-  {e:"cheaper?",p:"pián yí yī diǎn ma",t:[2,2,1,3,0],z:"便宜一点吗？",em:"📉",tip:"pián and yí rise, yī flat, diǎn dips"},
-  {e:"lowest price?",p:"zuì dī duō shǎo",t:[4,1,1,3],z:"最低多少？",em:"⬇️",tip:"zuì falls, dī flat, duō flat, shǎo dips"},
-  {e:"i'll take it",p:"wǒ yào le",t:[3,4,0],z:"我要了",em:"🛒",tip:"wǒ dips, yào falls, le neutral"},
-  {e:"just looking",p:"suí biàn kàn kàn",t:[2,4,4,0],z:"随便看看",em:"👀",tip:"suí rises, biàn and kàn fall — polite leave me alone"},
-  {e:"do you have…?",p:"yǒu méi yǒu",t:[3,2,3],z:"有没有",em:"🔍",tip:"the essential do-you-have pattern"},
-  {e:"give me two",p:"gěi wǒ liǎng ge",t:[3,3,3,0],z:"给我两个",em:"✌️",tip:"gěi and wǒ and liǎng all dip, ge neutral"},
-  {e:"i'll think about it",p:"zài kàn kàn",t:[4,4,0],z:"再看看",em:"🤔",tip:"zài and kàn fall, kàn neutral — graceful exit"},
-  {e:"do you have a bag?",p:"yǒu dài zi ma",t:[3,4,0,0],z:"有袋子吗？",em:"🛍️",tip:"yǒu dips, dài falls, zi and ma neutral"},
-  {e:"can i try it on?",p:"kě yǐ shì chuān ma",t:[3,3,4,1,0],z:"可以试穿吗？",em:"👕",tip:"kě and yǐ dip, shì falls, chuān flat"},
-  {e:"other colors?",p:"yǒu bié de yán sè ma",t:[3,2,0,2,4,0],z:"有别的颜色吗？",em:"🎨",tip:"bié rises, yán rises, sè falls"},
-  {e:"bigger size?",p:"yǒu dà hào ma",t:[3,4,4,0],z:"有大号吗？",em:"📏",tip:"yǒu dips, dà and hào fall, ma neutral"},
-  {e:"is it fresh?",p:"xīn xiān ma",t:[1,1,0],z:"新鲜吗？",em:"🌿",tip:"both xīn and xiān flat — wet market essential"},
-  {e:"half a kilo",p:"bàn jīn",t:[4,1],z:"半斤",em:"⚖️",tip:"bàn falls, jīn flat — 500g in chinese market measure"},
-  {e:"one kilo",p:"yī jīn",t:[1,1],z:"一斤",em:"⚖️",tip:"both flat — markets use jīn not kg"},
-  {e:"i know the price",p:"wǒ zhī dào shì jià",t:[3,1,4,4,4],z:"我知道市价",em:"🧠",tip:"changes the dynamic with vendors instantly"},
-  {e:"final offer",p:"jiù zhè ge jià",t:[4,4,0,4],z:"就这个价",em:"🤜",tip:"jiù and zhè and jià fall, ge neutral"},
-  {e:"throw something in?",p:"néng ráo diǎn ma",t:[2,2,3,0],z:"能饶点吗？",em:"🎁",tip:"néng and ráo rise, diǎn dips — ask for a freebie"},
-  {e:"wrap it up",p:"bāng wǒ bāo yī xià",t:[1,3,1,1,4],z:"帮我包一下",em:"📦",tip:"bāng and bāo and yī flat, wǒ dips, xià falls"}
+  {e:"how much?",em:"💰",z:"多少钱？",
+   words:[{py:"duō shǎo",ph:"dwaw shaow",en:"how much"},{py:"qián",ph:"chyen",en:"money"}],
+   note:null},
+  {e:"too expensive",em:"😤",z:"太贵了",
+   words:[{py:"tài",ph:"tie",en:"too"},{py:"guì",ph:"gway",en:"expensive"},{py:"le",ph:"luh",en:"[really]"}],
+   note:null},
+  {e:"cheaper?",em:"📉",z:"便宜一点吗？",
+   words:[{py:"pián yi",ph:"pyen ee",en:"cheap"},{py:"yī diǎn",ph:"ee dyen",en:"a little"},{py:"ma",ph:"mah",en:"?"}],
+   note:"便宜 is one word — pyen-ee, both rising tones"},
+  {e:"lowest price?",em:"⬇️",z:"最低多少？",
+   words:[{py:"zuì dī",ph:"dzway dee",en:"lowest"},{py:"duō shǎo",ph:"dwaw shaow",en:"how much"}],
+   note:null},
+  {e:"i'll take it",em:"🛒",z:"我要了",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"yào",ph:"yow",en:"want"},{py:"le",ph:"luh",en:"[decided]"}],
+   note:null},
+  {e:"just looking",em:"👀",z:"随便看看",
+   words:[{py:"suí biàn",ph:"sway byen",en:"casually"},{py:"kàn kàn",ph:"kahn kahn",en:"look look"}],
+   note:"reduplication of 看 makes it sound relaxed — a polite way to signal you don't need help"},
+  {e:"do you have…?",em:"🔍",z:"有没有",
+   words:[{py:"yǒu méi yǒu",ph:"yo may yo",en:"have or not have"}],
+   note:null},
+  {e:"give me two",em:"✌️",z:"给我两个",
+   words:[{py:"gěi wǒ",ph:"gay waw",en:"give me"},{py:"liǎng ge",ph:"lyang guh",en:"two [of them]"}],
+   note:"两 not 二 — 两 is used for counting objects, 二 is the number alone"},
+  {e:"i'll think about it",em:"🤔",z:"再看看",
+   words:[{py:"zài",ph:"dzye",en:"again"},{py:"kàn kàn",ph:"kahn kahn",en:"look look"}],
+   note:"lit. 'look again' — graceful exit from a stall without offending the vendor"},
+  {e:"do you have a bag?",em:"🛍️",z:"有袋子吗？",
+   words:[{py:"yǒu",ph:"yo",en:"have"},{py:"dài zi",ph:"dye dzuh",en:"bag"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"can i try it on?",em:"👕",z:"可以试穿吗？",
+   words:[{py:"kě yǐ",ph:"kuh ee",en:"can"},{py:"shì chuān",ph:"shir chwahn",en:"try wear"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"other colors?",em:"🎨",z:"有别的颜色吗？",
+   words:[{py:"yǒu",ph:"yo",en:"have"},{py:"bié de",ph:"byeh duh",en:"other"},{py:"yán sè",ph:"yen suh",en:"color"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"bigger size?",em:"📏",z:"有大号吗？",
+   words:[{py:"yǒu",ph:"yo",en:"have"},{py:"dà hào",ph:"dah how",en:"large size"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"is it fresh?",em:"🌿",z:"新鲜吗？",
+   words:[{py:"xīn xiān",ph:"shin shyen",en:"fresh"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"half a kilo",em:"⚖️",z:"半斤",
+   words:[{py:"bàn",ph:"bahn",en:"half"},{py:"jīn",ph:"jin",en:"jin (500g)"}],
+   note:"1 斤 = 500g in China — half a 斤 is 250g. Markets use 斤 not kilograms"},
+  {e:"one jin (500g)",em:"⚖️",z:"一斤",
+   words:[{py:"yī",ph:"ee",en:"one"},{py:"jīn",ph:"jin",en:"jin (500g)"}],
+   note:"1 斤 = 500g. Don't confuse with a Western kilo — you'll get half what you expected"},
+  {e:"final offer",em:"🤜",z:"就这个价",
+   words:[{py:"jiù",ph:"jyo",en:"just"},{py:"zhè ge",ph:"juh guh",en:"this"},{py:"jià",ph:"jyah",en:"price"}],
+   note:null},
+  {e:"wrap it up",em:"📦",z:"帮我包一下",
+   words:[{py:"bāng wǒ",ph:"bahng waw",en:"help me"},{py:"bāo",ph:"bow",en:"wrap"},{py:"yī xià",ph:"ee shyah",en:"a moment"}],
+   note:null},
+  {e:"do you have a bag?",em:"🛍️",z:"有袋子吗？",
+   words:[{py:"yǒu",ph:"yo",en:"have"},{py:"dài zi",ph:"dye dzuh",en:"bag"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"i'll think about it",em:"🤔",z:"再看看",
+   words:[{py:"zài",ph:"dzye",en:"again"},{py:"kàn kàn",ph:"kahn kahn",en:"look look"}],
+   note:null}
 ],
 "🚄 high-speed rail":[
-  {e:"high-speed train",p:"gāo tiě",t:[1,3],z:"高铁",em:"🚄",tip:"gāo flat, tiě dips — everyone calls it this"},
-  {e:"train station",p:"huǒ chē zhàn",t:[3,1,4],z:"火车站",em:"🏛️",tip:"huǒ dips, chē flat, zhàn falls"},
-  {e:"ticket",p:"piào",t:[4],z:"票",em:"🎫",tip:"falling tone — sharp and short"},
-  {e:"one ticket to…",p:"yī zhāng qù…de piào",t:[1,1,4,0,4],z:"一张去…的票",em:"🎟️",tip:"yī and zhāng flat, qù falls, de neutral, piào falls"},
-  {e:"which platform?",p:"jǐ hào zhàn tái",t:[3,4,4,2],z:"几号站台？",em:"🚉",tip:"jǐ dips, hào and zhàn fall, tái rises"},
-  {e:"where is my seat?",p:"wǒ de zuò wèi zài nǎ",t:[3,0,4,4,4,3],z:"我的座位在哪？",em:"💺",tip:"zuò and wèi and zài fall, nǎ dips"},
-  {e:"second class",p:"èr děng zuò",t:[4,3,4],z:"二等座",em:"🪑",tip:"èr and zuò fall, děng dips — most common class"},
-  {e:"first class",p:"yī děng zuò",t:[1,3,4],z:"一等座",em:"👑",tip:"yī flat, děng dips, zuò falls"},
-  {e:"when does it depart?",p:"jǐ diǎn fā chē",t:[3,3,1,1],z:"几点发车？",em:"🕐",tip:"jǐ and diǎn dip, fā and chē flat"},
-  {e:"is it delayed?",p:"wǎn diǎn le ma",t:[3,3,0,0],z:"晚点了吗？",em:"⏰",tip:"wǎn and diǎn dip, le and ma neutral"},
-  {e:"coming through",p:"jiè guò yī xià",t:[4,4,1,4],z:"借过一下",em:"🚶",tip:"jiè and guò fall, yī flat, xià falls"},
-  {e:"passport",p:"hù zhào",t:[4,4],z:"护照",em:"🛂",tip:"hù and zhào both fall — needed at ticket counters"},
-  {e:"security check",p:"ān jiǎn",t:[1,3],z:"安检",em:"🔒",tip:"ān flat, jiǎn dips"},
-  {e:"ticket gate",p:"jiǎn piào kǒu",t:[3,4,3],z:"检票口",em:"🚪",tip:"jiǎn and kǒu dip, piào falls"},
-  {e:"luggage",p:"xíng lǐ",t:[2,3],z:"行李",em:"🧳",tip:"xíng rises, lǐ dips"},
-  {e:"is this seat taken?",p:"yǒu rén ma",t:[3,2,0],z:"有人吗？",em:"👤",tip:"yǒu dips, rén rises, ma neutral — just three words"},
-  {e:"i missed my train",p:"wǒ cuò guò le",t:[3,4,4,0],z:"我错过了",em:"😱",tip:"wǒ dips, cuò and guò fall, le neutral"},
-  {e:"can i change my ticket?",p:"kě yǐ gǎi qiān ma",t:[3,3,3,1,0],z:"可以改签吗？",em:"🔄",tip:"kě and yǐ and gǎi dip, qiān flat, ma neutral"},
-  {e:"next train",p:"xià yī bān chē",t:[4,1,1,1],z:"下一班车",em:"⏭️",tip:"xià falls, then three flat tones"},
-  {e:"timetable",p:"shí kè biǎo",t:[2,4,3],z:"时刻表",em:"📅",tip:"shí rises, kè falls, biǎo dips"}
+  {e:"high-speed train",em:"🚄",z:"高铁",
+   words:[{py:"gāo tiě",ph:"gow tyeh",en:"high iron"}],
+   note:"高铁 is China's bullet train network — one of the best in the world, usually on time"},
+  {e:"train station",em:"🏛️",z:"火车站",
+   words:[{py:"huǒ chē",ph:"hwaw chuh",en:"fire cart"},{py:"zhàn",ph:"jahn",en:"station"}],
+   note:"lit. 'fire cart station' — the original steam engine name that stuck"},
+  {e:"ticket",em:"🎫",z:"票",
+   words:[{py:"piào",ph:"pyow",en:"ticket"}],
+   note:null},
+  {e:"one ticket to…",em:"🎟️",z:"一张去…的票",
+   words:[{py:"yī zhāng",ph:"ee jahng",en:"one [flat]"},{py:"qù",ph:"choo",en:"go to"},{py:"de piào",ph:"duh pyow",en:"'s ticket"}],
+   note:"张 is the measure word for flat things like tickets, paper, tables"},
+  {e:"which platform?",em:"🚉",z:"几号站台？",
+   words:[{py:"jǐ hào",ph:"jee how",en:"which number"},{py:"zhàn tái",ph:"jahn tie",en:"platform"}],
+   note:null},
+  {e:"where is my seat?",em:"💺",z:"我的座位在哪？",
+   words:[{py:"wǒ de",ph:"waw duh",en:"my"},{py:"zuò wèi",ph:"dzwaw way",en:"seat"},{py:"zài nǎ",ph:"dzye nah",en:"where"}],
+   note:null},
+  {e:"second class",em:"🪑",z:"二等座",
+   words:[{py:"èr děng",ph:"ar dung",en:"second class"},{py:"zuò",ph:"dzwaw",en:"seat"}],
+   note:"the standard class — comfortable, fast, affordable. Most Chinese travel this way"},
+  {e:"first class",em:"👑",z:"一等座",
+   words:[{py:"yī děng",ph:"ee dung",en:"first class"},{py:"zuò",ph:"dzwaw",en:"seat"}],
+   note:null},
+  {e:"when does it depart?",em:"🕐",z:"几点发车？",
+   words:[{py:"jǐ diǎn",ph:"jee dyen",en:"what time"},{py:"fā chē",ph:"fah chuh",en:"depart"}],
+   note:null},
+  {e:"is it delayed?",em:"⏰",z:"晚点了吗？",
+   words:[{py:"wǎn diǎn",ph:"wahn dyen",en:"late"},{py:"le",ph:"luh",en:"[already]"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"coming through",em:"🚶",z:"借过一下",
+   words:[{py:"jiè guò",ph:"jyeh gwaw",en:"borrow passage"},{py:"yī xià",ph:"ee shyah",en:"a moment"}],
+   note:"essential on 高铁 — carriages fill up fast and overhead storage is competitive"},
+  {e:"passport",em:"🛂",z:"护照",
+   words:[{py:"hù zhào",ph:"hoo jow",en:"protect document"}],
+   note:"you need your passport to buy tickets and pass through ticket gates as a foreigner"},
+  {e:"security check",em:"🔒",z:"安检",
+   words:[{py:"ān jiǎn",ph:"ahn jyen",en:"safety check"}],
+   note:"all stations have airport-style security — arrive early"},
+  {e:"ticket gate",em:"🚪",z:"检票口",
+   words:[{py:"jiǎn piào",ph:"jyen pyow",en:"check ticket"},{py:"kǒu",ph:"koh",en:"gate/mouth"}],
+   note:"gates close 5 minutes before departure — don't cut it close"},
+  {e:"luggage",em:"🧳",z:"行李",
+   words:[{py:"xíng lǐ",ph:"shing lee",en:"travel goods"}],
+   note:null},
+  {e:"is this seat taken?",em:"👤",z:"有人吗？",
+   words:[{py:"yǒu rén",ph:"yo ren",en:"have person"},{py:"ma",ph:"mah",en:"?"}],
+   note:"lit. 'is there a person?' — used for seats, tables, anywhere you want to sit"},
+  {e:"i missed my train",em:"😱",z:"我错过了",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"cuò guò",ph:"tswaw gwaw",en:"missed"},{py:"le",ph:"luh",en:"[done]"}],
+   note:null},
+  {e:"can i change my ticket?",em:"🔄",z:"可以改签吗？",
+   words:[{py:"kě yǐ",ph:"kuh ee",en:"can"},{py:"gǎi qiān",ph:"gye chyen",en:"change ticket"},{py:"ma",ph:"mah",en:"?"}],
+   note:"改签 is the official term — high-speed tickets can usually be changed for a small fee"},
+  {e:"next train",em:"⏭️",z:"下一班车",
+   words:[{py:"xià",ph:"shyah",en:"next"},{py:"yī bān",ph:"ee bahn",en:"one service"},{py:"chē",ph:"chuh",en:"train"}],
+   note:null},
+  {e:"timetable",em:"📅",z:"时刻表",
+   words:[{py:"shí kè",ph:"shir kuh",en:"time"},{py:"biǎo",ph:"byow",en:"table/chart"}],
+   note:null}
 ],
 "🗺️ getting around":[
-  {e:"left",p:"zuǒ",t:[3],z:"左",em:"⬅️",tip:"dip tone — sounds like zwaw"},
-  {e:"right",p:"yòu",t:[4],z:"右",em:"➡️",tip:"falling tone — short and firm"},
-  {e:"straight ahead",p:"yī zhí zǒu",t:[1,2,3],z:"一直走",em:"⬆️",tip:"yī flat, zhí rises, zǒu dips"},
-  {e:"turn",p:"guǎi",t:[3],z:"拐",em:"↩️",tip:"dip tone — add zuǒ or yòu after it"},
-  {e:"stop here",p:"jiù zhè lǐ",t:[4,4,3],z:"就这里",em:"✋",tip:"jiù and zhè fall, lǐ dips — use in taxis"},
-  {e:"take me to…",p:"qù",t:[4],z:"去",em:"🚖",tip:"one falling word — say qù then the destination"},
-  {e:"how far?",p:"duō yuǎn",t:[1,3],z:"多远？",em:"📏",tip:"duō flat, yuǎn dips"},
-  {e:"i'm lost",p:"wǒ mí lù le",t:[3,2,4,0],z:"我迷路了",em:"😰",tip:"mí rises, lù falls, le neutral"},
-  {e:"didi (ride app)",p:"dī dī",t:[1,1],z:"滴滴",em:"🚗",tip:"both flat — china's uber"},
-  {e:"where's the subway?",p:"dì tiě zài nǎ",t:[4,3,4,3],z:"地铁在哪？",em:"🚇",tip:"dì and zài fall, tiě and nǎ dip"},
-  {e:"bus stop",p:"gōng jiāo zhàn",t:[1,1,4],z:"公交站",em:"🚌",tip:"gōng and jiāo flat, zhàn falls"},
-  {e:"how many stops?",p:"jǐ zhàn",t:[3,4],z:"几站？",em:"🔢",tip:"jǐ dips, zhàn falls — on bus or subway"},
-  {e:"next stop",p:"xià yī zhàn",t:[4,1,4],z:"下一站",em:"⏭️",tip:"xià and zhàn fall, yī flat"},
-  {e:"i want to get off",p:"wǒ yào xià chē",t:[3,4,4,1],z:"我要下车",em:"🚏",tip:"wǒ dips, yào and xià fall, chē flat"},
-  {e:"is there a map?",p:"yǒu dì tú ma",t:[3,4,2,0],z:"有地图吗？",em:"🗺️",tip:"yǒu dips, dì falls, tú rises, ma neutral"},
-  {e:"nearby",p:"jiù zài fù jìn",t:[4,4,4,4],z:"就在附近",em:"📍",tip:"four falling tones — all firm"},
-  {e:"far from here",p:"hěn yuǎn",t:[3,3],z:"很远",em:"🔭",tip:"hěn and yuǎn both dip"},
-  {e:"can you walk there?",p:"zǒu lù qù",t:[3,4,4],z:"走路去？",em:"🚶",tip:"zǒu dips, lù and qù fall"},
-  {e:"turn left at the corner",p:"zài lù kǒu zuǒ guǎi",t:[4,4,3,3,3],z:"在路口左拐",em:"🔀",tip:"zài and lù fall, kǒu and zuǒ and guǎi dip"},
-  {e:"share my location",p:"fā wèi zhì gěi nǐ",t:[1,4,4,3,3],z:"发位置给你",em:"📲",tip:"fā flat, wèi and zhì fall, gěi and nǐ dip"}
+  {e:"left",em:"⬅️",z:"左",
+   words:[{py:"zuǒ",ph:"dzwaw",en:"left"}],
+   note:null},
+  {e:"right",em:"➡️",z:"右",
+   words:[{py:"yòu",ph:"yo",en:"right"}],
+   note:null},
+  {e:"straight ahead",em:"⬆️",z:"一直走",
+   words:[{py:"yī zhí",ph:"ee jir",en:"straight"},{py:"zǒu",ph:"dzoh",en:"walk/go"}],
+   note:null},
+  {e:"turn",em:"↩️",z:"拐",
+   words:[{py:"guǎi",ph:"gwye",en:"turn"}],
+   note:"add 左 (left) or 右 (right) after: 左拐 = turn left"},
+  {e:"stop here",em:"✋",z:"就这里",
+   words:[{py:"jiù",ph:"jyo",en:"just"},{py:"zhè lǐ",ph:"juh lee",en:"here"}],
+   note:"say to taxi drivers — cleaner than trying to explain an address"},
+  {e:"take me to…",em:"🚖",z:"去",
+   words:[{py:"qù",ph:"choo",en:"go to"}],
+   note:"just say 去 + destination — e.g. 去北京南站. Drivers understand"},
+  {e:"how far?",em:"📏",z:"多远？",
+   words:[{py:"duō yuǎn",ph:"dwaw ywahn",en:"how far"}],
+   note:null},
+  {e:"i'm lost",em:"😰",z:"我迷路了",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"mí lù",ph:"mee loo",en:"lost"},{py:"le",ph:"luh",en:"[happened]"}],
+   note:null},
+  {e:"didi (ride app)",em:"🚗",z:"滴滴",
+   words:[{py:"dī dī",ph:"dee dee",en:"drip drip"}],
+   note:"China's dominant ride-hailing app — like Uber. Set up before you arrive, needs Chinese phone verification workaround"},
+  {e:"where's the subway?",em:"🚇",z:"地铁在哪？",
+   words:[{py:"dì tiě",ph:"dee tyeh",en:"subway"},{py:"zài nǎ",ph:"dzye nah",en:"where"}],
+   note:null},
+  {e:"bus stop",em:"🚌",z:"公交站",
+   words:[{py:"gōng jiāo",ph:"gong jyow",en:"public transit"},{py:"zhàn",ph:"jahn",en:"stop"}],
+   note:null},
+  {e:"how many stops?",em:"🔢",z:"几站？",
+   words:[{py:"jǐ",ph:"jee",en:"how many"},{py:"zhàn",ph:"jahn",en:"stops"}],
+   note:null},
+  {e:"next stop",em:"⏭️",z:"下一站",
+   words:[{py:"xià",ph:"shyah",en:"next"},{py:"yī zhàn",ph:"ee jahn",en:"one stop"}],
+   note:null},
+  {e:"i want to get off",em:"🚏",z:"我要下车",
+   words:[{py:"wǒ",ph:"waw",en:"I"},{py:"yào",ph:"yow",en:"want"},{py:"xià chē",ph:"shyah chuh",en:"get off"}],
+   note:null},
+  {e:"is there a map?",em:"🗺️",z:"有地图吗？",
+   words:[{py:"yǒu",ph:"yo",en:"have"},{py:"dì tú",ph:"dee too",en:"map"},{py:"ma",ph:"mah",en:"?"}],
+   note:null},
+  {e:"nearby",em:"📍",z:"就在附近",
+   words:[{py:"jiù zài",ph:"jyo dzye",en:"right at"},{py:"fù jìn",ph:"foo jin",en:"nearby"}],
+   note:null},
+  {e:"far from here",em:"🔭",z:"很远",
+   words:[{py:"hěn",ph:"hun",en:"very"},{py:"yuǎn",ph:"ywahn",en:"far"}],
+   note:null},
+  {e:"can you walk there?",em:"🚶",z:"走路去？",
+   words:[{py:"zǒu lù",ph:"dzoh loo",en:"walk"},{py:"qù",ph:"choo",en:"go"}],
+   note:null},
+  {e:"turn left at the corner",em:"🔀",z:"在路口左拐",
+   words:[{py:"zài",ph:"dzye",en:"at"},{py:"lù kǒu",ph:"loo koh",en:"intersection"},{py:"zuǒ guǎi",ph:"dzwaw gwye",en:"turn left"}],
+   note:null},
+  {e:"share my location",em:"📲",z:"发位置给你",
+   words:[{py:"fā",ph:"fah",en:"send"},{py:"wèi zhì",ph:"way jir",en:"location"},{py:"gěi nǐ",ph:"gay nee",en:"to you"}],
+   note:"WeChat location sharing is the standard way to meet up in China — more reliable than addresses"}
 ],
 "🍎 fruits":[
-  {e:"watermelon",p:"xī guā",t:[1,1],z:"西瓜",em:"🍉",tip:"both flat — xī and guā"},
-  {e:"mango",p:"máng guǒ",t:[2,3],z:"芒果",em:"🥭",tip:"máng rises, guǒ dips"},
-  {e:"lychee",p:"lì zhī",t:[4,1],z:"荔枝",em:"🍒",tip:"lì falls, zhī flat"},
-  {e:"dragon fruit",p:"huǒ lóng guǒ",t:[3,2,3],z:"火龙果",em:"🐉",tip:"huǒ and guǒ dip, lóng rises"},
-  {e:"peach",p:"táo zi",t:[2,0],z:"桃子",em:"🍑",tip:"táo rises, zi neutral"},
-  {e:"grape",p:"pú táo",t:[2,2],z:"葡萄",em:"🍇",tip:"both syllables rise"},
-  {e:"strawberry",p:"cǎo méi",t:[3,2],z:"草莓",em:"🍓",tip:"cǎo dips, méi rises"},
-  {e:"pineapple",p:"bō luó",t:[1,2],z:"菠萝",em:"🍍",tip:"bō flat, luó rises"},
-  {e:"banana",p:"xiāng jiāo",t:[1,1],z:"香蕉",em:"🍌",tip:"both flat — easy tones"},
-  {e:"apple",p:"píng guǒ",t:[2,3],z:"苹果",em:"🍎",tip:"píng rises, guǒ dips"},
-  {e:"orange",p:"chéng zi",t:[2,0],z:"橙子",em:"🍊",tip:"chéng rises, zi neutral"},
-  {e:"pear",p:"lí",t:[2],z:"梨",em:"🍐",tip:"rising tone — short and simple"},
-  {e:"cherry",p:"yīng táo",t:[1,2],z:"樱桃",em:"🍒",tip:"yīng flat, táo rises"},
-  {e:"pomelo",p:"yòu zi",t:[4,0],z:"柚子",em:"🍋",tip:"yòu falls, zi neutral — huge in china"},
-  {e:"longan",p:"lóng yǎn",t:[2,3],z:"龙眼",em:"🟤",tip:"lóng rises, yǎn dips — lit. dragon eye"},
-  {e:"passion fruit",p:"bǎi xiāng guǒ",t:[3,1,3],z:"百香果",em:"💜",tip:"bǎi and guǒ dip, xiāng flat"},
-  {e:"kiwi",p:"mí hóu táo",t:[2,2,2],z:"猕猴桃",em:"🥝",tip:"three rising tones — lit. macaque peach"},
-  {e:"plum",p:"lǐ zi",t:[3,0],z:"李子",em:"🟣",tip:"lǐ dips, zi neutral"},
-  {e:"coconut",p:"yē zi",t:[1,0],z:"椰子",em:"🥥",tip:"yē flat, zi neutral"},
-  {e:"durian",p:"liú lián",t:[2,2],z:"榴莲",em:"🌵",tip:"both rise — the notorious king of fruit"}
+  {e:"watermelon",em:"🍉",z:"西瓜",words:[{py:"xī guā",ph:"shee gwah",en:"west melon"}],note:null},
+  {e:"mango",em:"🥭",z:"芒果",words:[{py:"máng guǒ",ph:"mahng gwaw",en:"mango"}],note:null},
+  {e:"lychee",em:"🍒",z:"荔枝",words:[{py:"lì zhī",ph:"lee jir",en:"lychee"}],note:"fresh lychee season is June–July — nothing like the canned version"},
+  {e:"dragon fruit",em:"🐉",z:"火龙果",words:[{py:"huǒ lóng guǒ",ph:"hwaw long gwaw",en:"fire dragon fruit"}],note:null},
+  {e:"peach",em:"🍑",z:"桃子",words:[{py:"táo zi",ph:"taow dzuh",en:"peach"}],note:"Chinese peaches are exceptional — flat peaches (蟠桃) are especially prized"},
+  {e:"grape",em:"🍇",z:"葡萄",words:[{py:"pú táo",ph:"poo taow",en:"grape"}],note:null},
+  {e:"strawberry",em:"🍓",z:"草莓",words:[{py:"cǎo méi",ph:"tsow may",en:"grass berry"}],note:null},
+  {e:"pineapple",em:"🍍",z:"菠萝",words:[{py:"bō luó",ph:"baw lwaw",en:"pineapple"}],note:null},
+  {e:"banana",em:"🍌",z:"香蕉",words:[{py:"xiāng jiāo",ph:"shyang jyow",en:"fragrant plantain"}],note:null},
+  {e:"apple",em:"🍎",z:"苹果",words:[{py:"píng guǒ",ph:"ping gwaw",en:"apple"}],note:null},
+  {e:"orange",em:"🍊",z:"橙子",words:[{py:"chéng zi",ph:"chung dzuh",en:"orange"}],note:null},
+  {e:"pear",em:"🍐",z:"梨",words:[{py:"lí",ph:"lee",en:"pear"}],note:null},
+  {e:"cherry",em:"🍒",z:"樱桃",words:[{py:"yīng táo",ph:"ying taow",en:"cherry"}],note:null},
+  {e:"pomelo",em:"🍋",z:"柚子",words:[{py:"yòu zi",ph:"yo dzuh",en:"pomelo"}],note:"the giant citrus fruit everywhere in autumn — a Mid-Autumn Festival staple"},
+  {e:"longan",em:"🟤",z:"龙眼",words:[{py:"lóng yǎn",ph:"long yen",en:"dragon eye"}],note:"named for its dark seed visible through white flesh — like an eyeball"},
+  {e:"passion fruit",em:"💜",z:"百香果",words:[{py:"bǎi xiāng guǒ",ph:"bye shyang gwaw",en:"hundred fragrance fruit"}],note:null},
+  {e:"kiwi",em:"🥝",z:"猕猴桃",words:[{py:"mí hóu táo",ph:"mee ho taow",en:"macaque peach"}],note:"named after the monkey that supposedly loved them"},
+  {e:"plum",em:"🟣",z:"李子",words:[{py:"lǐ zi",ph:"lee dzuh",en:"plum"}],note:null},
+  {e:"coconut",em:"🥥",z:"椰子",words:[{py:"yē zi",ph:"yeh dzuh",en:"coconut"}],note:null},
+  {e:"durian",em:"🌵",z:"榴莲",words:[{py:"liú lián",ph:"lyo lyen",en:"durian"}],note:"the king of fruits — banned in many hotels and on public transport due to its smell. Try it anyway"}
 ],
 "🥟 food names":[
-  {e:"steamed bun",p:"bāo zi",t:[1,0],z:"包子",em:"🥟",tip:"bāo flat, zi neutral — breakfast staple"},
-  {e:"soup dumpling",p:"xiǎo lóng bāo",t:[3,2,1],z:"小笼包",em:"🥟",tip:"xiǎo dips, lóng rises, bāo flat"},
-  {e:"fried dough stick",p:"yóu tiáo",t:[2,2],z:"油条",em:"🟡",tip:"both rise — classic breakfast with soy milk"},
-  {e:"scallion pancake",p:"cōng yóu bǐng",t:[1,2,3],z:"葱油饼",em:"🫓",tip:"cōng flat, yóu rises, bǐng dips"},
-  {e:"candied fruit skewer",p:"táng hú lu",t:[2,2,0],z:"糖葫芦",em:"🍡",tip:"táng and hú rise, lu neutral — beijing classic"},
-  {e:"hot pot",p:"huǒ guō",t:[3,1],z:"火锅",em:"🍲",tip:"huǒ dips, guō flat — communal dining essential"},
-  {e:"bubble tea",p:"nǎi chá",t:[3,2],z:"奶茶",em:"🧋",tip:"nǎi dips, chá rises — everywhere in china now"},
-  {e:"congee",p:"zhōu",t:[1],z:"粥",em:"🍚",tip:"flat tone — one syllable, very easy"},
-  {e:"bbq skewer",p:"chuàn r",t:[4,0],z:"串儿",em:"🍢",tip:"chuàn falls, r neutral — night market essential"},
-  {e:"egg fried rice",p:"chǎo fàn",t:[3,4],z:"炒饭",em:"🍳",tip:"chǎo dips, fàn falls"},
-  {e:"mapo tofu",p:"má pó dòu fu",t:[2,2,4,0],z:"麻婆豆腐",em:"🌶️",tip:"má and pó rise, dòu falls, fu neutral"},
-  {e:"cold noodles",p:"liáng miàn",t:[2,4],z:"凉面",em:"🍜",tip:"liáng rises, miàn falls — great in summer"},
-  {e:"peking duck",p:"běi jīng kǎo yā",t:[3,1,3,1],z:"北京烤鸭",em:"🦆",tip:"běi and kǎo dip, jīng and yā flat"},
-  {e:"egg tart",p:"dàn tǎ",t:[4,3],z:"蛋挞",em:"🥧",tip:"dàn falls, tǎ dips — cantonese classic"},
-  {e:"soy milk",p:"dòu jiāng",t:[4,1],z:"豆浆",em:"🥛",tip:"dòu falls, jiāng flat — pair with yóu tiáo"},
-  {e:"stinky tofu",p:"chòu dòu fu",t:[4,4,0],z:"臭豆腐",em:"🧀",tip:"chòu and dòu fall — smells intense, tastes great"},
-  {e:"rice noodle roll",p:"cháng fěn",t:[2,3],z:"肠粉",em:"🍥",tip:"cháng rises, fěn dips — cantonese breakfast"},
-  {e:"dan dan noodles",p:"dān dān miàn",t:[1,1,4],z:"担担面",em:"🌶️",tip:"dān and dān flat, miàn falls — sichuan classic"},
-  {e:"savory crepe",p:"jiān bǐng",t:[1,3],z:"煎饼",em:"🫔",tip:"jiān flat, bǐng dips — popular street breakfast"},
-  {e:"braised pork rice",p:"lǔ ròu fàn",t:[3,4,4],z:"卤肉饭",em:"🍖",tip:"lǔ dips, ròu and fàn fall — taiwanese comfort food"}
+  {e:"steamed bun",em:"🥟",z:"包子",words:[{py:"bāo zi",ph:"bow dzuh",en:"wrapped thing"}],note:"filled with pork, vegetables, or red bean — the backbone of Chinese breakfast"},
+  {e:"soup dumpling",em:"🥟",z:"小笼包",words:[{py:"xiǎo lóng bāo",ph:"shyow long bow",en:"small basket bun"}],note:"bite a small hole first, sip the soup, then eat — or you'll wear it"},
+  {e:"fried dough stick",em:"🟡",z:"油条",words:[{py:"yóu tiáo",ph:"yo tyow",en:"oil strip"}],note:"the classic breakfast pairing with 豆浆 (soy milk) — dip and eat"},
+  {e:"scallion pancake",em:"🫓",z:"葱油饼",words:[{py:"cōng yóu bǐng",ph:"tsong yo bing",en:"onion oil cake"}],note:null},
+  {e:"candied fruit skewer",em:"🍡",z:"糖葫芦",words:[{py:"táng hú lu",ph:"tahng hoo loo",en:"sugar gourd"}],note:"a Beijing winter street classic — hawthorn berries coated in hard sugar shell"},
+  {e:"hot pot",em:"🍲",z:"火锅",words:[{py:"huǒ guō",ph:"hwaw gwaw",en:"fire pot"}],note:"communal cooking in boiling broth — Chongqing style is numbing spicy, Cantonese is mild. A social meal, never rushed"},
+  {e:"bubble tea",em:"🧋",z:"奶茶",words:[{py:"nǎi chá",ph:"nye chah",en:"milk tea"}],note:"Chinese milk tea culture is serious — brands like 喜茶 and 茶颜悦色 have hour-long queues"},
+  {e:"congee",em:"🍚",z:"粥",words:[{py:"zhōu",ph:"joe",en:"congee"}],note:"rice cooked down to porridge — the ultimate Chinese comfort food and hangover cure"},
+  {e:"bbq skewer",em:"🍢",z:"串儿",words:[{py:"chuàn r",ph:"chwahr",en:"skewer"}],note:"the 儿 is Beijing dialect — you'll hear it everywhere in the north. Night market essential"},
+  {e:"egg fried rice",em:"🍳",z:"炒饭",words:[{py:"chǎo fàn",ph:"chaow fahn",en:"fried rice"}],note:null},
+  {e:"mapo tofu",em:"🌶️",z:"麻婆豆腐",words:[{py:"má pó",ph:"mah paw",en:"pockmarked lady"},{py:"dòu fu",ph:"doh foo",en:"tofu"}],note:"named after the pockmarked woman who supposedly invented it in Chengdu — Sichuan classic with numbing 花椒 spice"},
+  {e:"cold noodles",em:"🍜",z:"凉面",words:[{py:"liáng miàn",ph:"lyang myen",en:"cold noodles"}],note:null},
+  {e:"peking duck",em:"🦆",z:"北京烤鸭",words:[{py:"běi jīng",ph:"bay jing",en:"Beijing"},{py:"kǎo yā",ph:"kaow yah",en:"roast duck"}],note:"eat at Da Dong or Siji Minfu — wrap in pancake with cucumber, spring onion, and hoisin"},
+  {e:"egg tart",em:"🥧",z:"蛋挞",words:[{py:"dàn tǎ",ph:"dahn tah",en:"egg tart"}],note:"Cantonese classic — Portuguese influence via Macau. Flaky pastry, wobbly custard"},
+  {e:"soy milk",em:"🥛",z:"豆浆",words:[{py:"dòu jiāng",ph:"doh jyang",en:"bean liquid"}],note:"fresh hot soy milk from a street stall with 油条 is one of the great cheap breakfasts"},
+  {e:"stinky tofu",em:"🧀",z:"臭豆腐",words:[{py:"chòu dòu fu",ph:"choh doh foo",en:"smelly tofu"}],note:"fermented tofu — smells alarming, tastes incredible. A Changsha street food staple. Try it in Hunan"},
+  {e:"rice noodle roll",em:"🍥",z:"肠粉",words:[{py:"cháng fěn",ph:"chahng fun",en:"intestine noodle"}],note:"named for its shape, not its contents — silky steamed rice sheet filled with egg or shrimp"},
+  {e:"dan dan noodles",em:"🌶️",z:"担担面",words:[{py:"dān dān miàn",ph:"dahn dahn myen",en:"shoulder pole noodles"}],note:"named after the carrying pole vendors used to hawk them — Sichuan noodle with sesame, chili oil, preserved veg"},
+  {e:"savory crepe",em:"🫔",z:"煎饼",words:[{py:"jiān bǐng",ph:"jyen bing",en:"pan cake"}],note:"popular Beijing street breakfast — egg, crispy cracker, hoisin, chili folded into a crepe"},
+  {e:"braised pork rice",em:"🍖",z:"卤肉饭",words:[{py:"lǔ ròu fàn",ph:"loo roh fahn",en:"braised meat rice"}],note:"Taiwanese comfort food — slow-braised fatty pork over rice. Simple, perfect"}
 ]
 };
 
 var cats=Object.keys(V);
-var cat=0, deck=[], idx=0, seen=0, got=0;
-var tc={1:'t1',2:'t2',3:'t3',4:'t4',0:'t0'};
+var cat=0,deck=[],idx=0,seen=0,got=0;
 
 function buildTabs(){
-  var el=document.getElementById('tabs');
   var h='';
   for(var i=0;i<cats.length;i++){
     h+='<button class="tab'+(i===cat?' on':'')+'" onclick="switchCat('+i+')">'+cats[i]+'</button>';
   }
-  el.innerHTML=h;
+  document.getElementById('tabs').innerHTML=h;
   document.getElementById('catname').textContent=cats[cat];
 }
 
 function switchCat(i){
-  cat=i; idx=0; seen=0; got=0;
+  cat=i;idx=0;seen=0;got=0;
   deck=V[cats[cat]].slice();
   buildTabs();
   showCard();
@@ -327,33 +606,37 @@ function switchCat(i){
 function showCard(){
   document.getElementById('donescreen').style.display='none';
   document.getElementById('cardbox').style.display='flex';
-  document.querySelector('.nav').style.display='flex';
+  document.getElementById('navrow').style.display='flex';
   document.getElementById('score').textContent='';
-
-  if(idx>=deck.length){ showDone(); return; }
+  if(idx>=deck.length){showDone();return;}
   var c=deck[idx];
-
   document.getElementById('cnum').textContent=(idx+1)+' / '+deck.length;
   document.getElementById('emoji').textContent=c.em;
   document.getElementById('cen').textContent=c.e;
-  document.getElementById('cpy').textContent=c.p;
   document.getElementById('czh').textContent=c.z;
-  document.getElementById('ctip').textContent=c.tip||'';
   document.getElementById('pyblock').style.display='none';
   document.getElementById('revbtn').style.display='block';
 
-  var tb=document.getElementById('ctones');
-  while(tb.firstChild) tb.removeChild(tb.firstChild);
-  for(var i=0;i<c.t.length;i++){
-    var n=c.t[i];
-    var sp=document.createElement('span');
-    sp.className='tb '+tc[n];
-    sp.textContent=(n===0)?'·':String(n);
-    tb.appendChild(sp);
+  // build word row
+  var wr=document.getElementById('wordrow');
+  while(wr.firstChild)wr.removeChild(wr.firstChild);
+  for(var i=0;i<c.words.length;i++){
+    var w=c.words[i];
+    var div=document.createElement('div');
+    div.className='word';
+    var ph=document.createElement('div');ph.className='word-ph';ph.textContent=w.ph;
+    var py=document.createElement('div');py.className='word-py';py.textContent=w.py;
+    var en=document.createElement('div');en.className='word-en';en.textContent=w.en;
+    div.appendChild(ph);div.appendChild(py);div.appendChild(en);
+    wr.appendChild(div);
   }
 
-  document.getElementById('pbf').style.width=Math.round(idx/deck.length*100)+'%';
-  document.getElementById('ptx').textContent=idx+'/'+deck.length;
+  // footnote
+  var fn=document.getElementById('fnote');
+  if(c.note){fn.textContent=c.note;fn.style.display='block';}
+  else{fn.textContent='';fn.style.display='none';}
+
+  bar();
 }
 
 function reveal(){
@@ -362,32 +645,60 @@ function reveal(){
 }
 
 function mark(yes){
-  seen++;
-  if(yes) got++;
-  idx++;
-  showCard();
+  seen++;if(yes)got++;
+  idx++;showCard();
   if(seen>0){
     var s=document.getElementById('score');
-    s.textContent=got+' got it · '+(seen-got)+' still learning';
+    s.innerHTML='<b>'+got+'</b> got it &middot; <b>'+(seen-got)+'</b> still learning';
   }
+}
+
+function bar(){
+  var n=deck.length;
+  document.getElementById('pbf').style.width=(n?Math.round(idx/n*100):0)+'%';
+  document.getElementById('ptx').textContent=idx+'/'+n;
 }
 
 function showDone(){
   document.getElementById('cardbox').style.display='none';
   document.getElementById('donescreen').style.display='flex';
-  document.querySelector('.nav').style.display='none';
+  document.getElementById('navrow').style.display='none';
   document.getElementById('donemsg').textContent=got+' / '+deck.length+' — nice work';
   document.getElementById('pbf').style.width='100%';
   document.getElementById('ptx').textContent=deck.length+'/'+deck.length;
 }
 
 function replay(){
-  idx=0; seen=0; got=0;
+  idx=0;seen=0;got=0;
   deck=V[cats[cat]].slice();
   showCard();
 }
 
 switchCat(0);
+
+// Swipe support
+var txStart=0,tyStart=0,txEnd=0,tyEnd=0;
+function onTS(e){txStart=e.changedTouches[0].screenX;tyStart=e.changedTouches[0].screenY;}
+function onTE(e){txEnd=e.changedTouches[0].screenX;tyEnd=e.changedTouches[0].screenY;doSwipe();}
+function doSwipe(){
+  var dx=txEnd-txStart,dy=tyEnd-tyStart;
+  if(Math.abs(dx)<40||Math.abs(dy)>Math.abs(dx))return;
+  var cb=document.getElementById('cardbox');
+  if(!cb||cb.style.display==='none')return;
+  cb.style.transition='transform .18s ease,opacity .18s ease';
+  cb.style.transform=dx<0?'translateX(-50px)':'translateX(50px)';
+  cb.style.opacity='0';
+  setTimeout(function(){
+    cb.style.transition='none';
+    cb.style.transform='translateX(0)';
+    cb.style.opacity='1';
+  },200);
+  if(dx<0){mark(false);}else{mark(true);}
+}
+var cb2=document.getElementById('cardbox');
+cb2.addEventListener('touchstart',onTS,{passive:true});
+cb2.addEventListener('touchend',onTE,{passive:true});
+
 </script>
 </body>
 </html>
